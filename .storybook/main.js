@@ -8,5 +8,19 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions"
   ],
-  "framework": "@storybook/react"
-}
+  "framework": {
+    name: "@storybook/react-webpack5",
+    options: {}
+  },
+  webpackFinal: async (config, { configType }) => {
+    config.module.rules = [
+      ...config.module.rules,
+      {
+        test: /\.styl$/,
+        use: ['style-loader', 'css-loader', 'stylus-loader'],
+      },
+    ]
+
+    return config;
+  }
+};
